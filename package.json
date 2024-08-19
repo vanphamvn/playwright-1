@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "plui": "npx playwright test --ui",
-    "plhtest": "npx playwright test uiComponents.spec.ts --project=chromium",
+    "plhtest": "npx playwright test usePageObjects.spec.ts --project=chromium",
     "pltestall": "npx playwright test --project=chromium",
     "autowait-dev": "URL=http://uitestingplayground.com/ajax npx playwright test autoWaiting.spec.ts --project=chromium"
   },
@@ -61,6 +61,7 @@
     "@angular/cli": "^14.2.10",
     "@angular/compiler-cli": "^14.2.12",
     "@angular/language-service": "14.2.12",
+    "@argos-ci/playwright": "^3.4.1",
     "@compodoc/compodoc": "^1.1.19",
     "@faker-js/faker": "^8.4.1",
     "@fortawesome/fontawesome-free": "^5.2.0",

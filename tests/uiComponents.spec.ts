@@ -88,94 +88,94 @@ test("Checkbox", async ({ page }) => {
     }
 });
 
-// test("Select", async ({ page }) => {
-//     const dropDownMenu = page.locator("ngx-header nb-select");
-//     await dropDownMenu.click();
-//     //const optionList = page.getByRole('list'). locator('nb-option')
-//     const optionList = page.locator("nb-option-list nb-option");
-//     await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]);
-//     await optionList.filter({ hasText: "Cosmic" }).click();
-//     const header = page.locator("nb-layout-header");
-//     await expect(header).toHaveCSS("background-color", "rgb(50, 50, 89)");
-//     const colors = {
-//         Light: "rgb(255, 255, 255)",
-//         Dark: "rgb(34, 43, 69)",
-//         Cosmic: "rgb(50, 50, 89)",
-//         Corporate: "rgb(255, 255, 255)",
-//     };
-//     await dropDownMenu.click();
-//     for (const color in colors) {
-//         await optionList.filter({ hasText: color }).click();
-//         await expect(header).toHaveCSS("background-color", colors[color]);
-//         if (color != "Corporate") await dropDownMenu.click();
-//     }
-// });
+test("Select", async ({ page }) => {
+    const dropDownMenu = page.locator("ngx-header nb-select");
+    await dropDownMenu.click();
+    //const optionList = page.getByRole('list'). locator('nb-option')
+    const optionList = page.locator("nb-option-list nb-option");
+    await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]);
+    await optionList.filter({ hasText: "Cosmic" }).click();
+    const header = page.locator("nb-layout-header");
+    await expect(header).toHaveCSS("background-color", "rgb(50, 50, 89)");
+    const colors = {
+        Light: "rgb(255, 255, 255)",
+        Dark: "rgb(34, 43, 69)",
+        Cosmic: "rgb(50, 50, 89)",
+        Corporate: "rgb(255, 255, 255)",
+    };
+    await dropDownMenu.click();
+    for (const color in colors) {
+        await optionList.filter({ hasText: color }).click();
+        await expect(header).toHaveCSS("background-color", colors[color]);
+        if (color != "Corporate") await dropDownMenu.click();
+    }
+});
 
-// test("Tooltip", async ({ page }) => {
-//     await page.getByText("Modal & Overlays").click();
-//     await page.getByText("Tooltip").click();
+test("Tooltip", async ({ page }) => {
+    await page.getByText("Modal & Overlays").click();
+    await page.getByText("Tooltip").click();
 
-//     const tooltipCard = page.locator("nb-card, nb-card", {
-//         hasText: "Tooltip Placements",
-//     });
-//     await tooltipCard.getByRole("button", { name: "Top" }).hover();
-//     //nb-tooltip div span
+    const tooltipCard = page.locator("nb-card, nb-card", {
+        hasText: "Tooltip Placements",
+    });
+    await tooltipCard.getByRole("button", { name: "Top" }).hover();
+    //nb-tooltip div span
 
-//     const tooltip = await page.locator("nb-tooltip").textContent();
-//     expect(tooltip).toEqual("This is a tooltip");
-// });
+    const tooltip = await page.locator("nb-tooltip").textContent();
+    expect(tooltip).toEqual("This is a tooltip");
+});
 
-// test("dialog box", async ({ page }) => {
-//     await page.getByText("Tables & Data").click();
-//     await page.getByText("Smart Table").click();
+test("dialog box", async ({ page }) => {
+    await page.getByText("Tables & Data").click();
+    await page.getByText("Smart Table").click();
 
-//     page.on("dialog", (dialog) => {
-//         expect(dialog.message()).toEqual("Are you sure you want to delete?");
-//         console.log(`Dialog message: ${dialog.message()}`);
-//         dialog.accept();
-//     });
+    page.on("dialog", (dialog) => {
+        expect(dialog.message()).toEqual("Are you sure you want to delete?");
+        console.log(`Dialog message: ${dialog.message()}`);
+        dialog.accept();
+    });
 
-//     await page
-//         .getByRole("table")
-//         .locator("tr", { hasText: "mdo@gmail.com" })
-//         .locator(".nb-trash")
-//         .click();
-//     await expect(page.locator("table tr").first()).not.toHaveText(
-//         "mdo@gmail.com"
-//     );
-// });
+    await page
+        .getByRole("table")
+        .locator("tr", { hasText: "mdo@gmail.com" })
+        .locator(".nb-trash")
+        .click();
+    await expect(page.locator("table tr").first()).not.toHaveText(
+        "mdo@gmail.com"
+    );
+});
 
-// test("web table edit age", async ({ page }) => {
-//     await page.getByText("Tables & Data").click();
-//     await page.getByText("Smart Table").click();
+test("web table edit age", async ({ page }) => {
+    await page.getByText("Tables & Data").click();
+    await page.getByText("Smart Table").click();
 
-//     const targetRow = page.getByRole("row", { name: "mdo@gmail.com" });
-//     await targetRow.locator(".nb-edit").click();
+    const targetRow = page.getByRole("row", { name: "mdo@gmail.com" });
+    await targetRow.locator(".nb-edit").click();
 
-//     await page.locator("input-editor").getByPlaceholder("Age").clear();
-//     await page.locator("input-editor").getByPlaceholder("Age").fill("40");
-//     await page.locator(".nb-checkmark").click();
+    await page.locator("input-editor").getByPlaceholder("Age").clear();
+    await page.locator("input-editor").getByPlaceholder("Age").fill("40");
+    await page.locator(".nb-checkmark").click();
 
-//     //3 test filter of the table
-//     const ages = ["20", "30", "40", "200"];
-//     for (let age of ages) {
-//         await page.locator("input-filter").getByPlaceholder("Age").clear();
-//         await page.locator("input-filter").getByPlaceholder("Age").fill(age);
-//         await page.waitForTimeout(500);
+    //3 test filter of the table
+    const ages = ["20", "30", "40", "200"];
+    for (let age of ages) {
+        await page.locator("input-filter").getByPlaceholder("Age").clear();
+        await page.locator("input-filter").getByPlaceholder("Age").fill(age);
+        await page.waitForTimeout(500);
 
-//         const ageRows = page.locator("tbody tr");
-//         for (let row of await ageRows.all()) {
-//             const cellValue = await row.locator("td").last().textContent();
-//             if (age == "200") {
-//                 expect(await page.getByRole("table").textContent()).toContain(
-//                     "No data found"
-//                 );
-//             } else {
-//                 expect(cellValue).toEqual(age);
-//             }
-//         }
-//     }
-// });
+        const ageRows = page.locator("tbody tr");
+        for (let row of await ageRows.all()) {
+            const cellValue = await row.locator("td").last().textContent();
+            if (age == "200") {
+                expect(await page.getByRole("table").textContent()).toContain(
+                    "No data found"
+                );
+            } else {
+                expect(cellValue).toEqual(age);
+            }
+        }
+    }
+});
 
 test("datepicker", async ({ page }) => {
     await page.getByText("Forms").click();
